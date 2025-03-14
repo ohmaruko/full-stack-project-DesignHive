@@ -1,3 +1,18 @@
 :root {
     --green: #6CCF8D;
+    --error-red: #ef7979;
+}
+
+/* we can change font:3 */
+h1, h2, h3 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+}
+p {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+}
+button {
+    font-family: "Inter", sans-serif;
+    font-weight: bold; 
 }

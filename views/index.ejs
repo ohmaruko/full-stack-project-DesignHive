@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="/style/login.css">
 </head>
 <body>
-    <div>
-        <h1>This is log in page</h1>
+    <div class="container">
+        <img src="/image/logo.svg" alt="Design Hive Logo" />
+        <h1>Log in to Design Hive</h1>
         <form name="login" action="/" method="POST">
             <input type="text" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
             <button type="submit">Log in</button>
         </form>
         <% if (locals.errorMessage) { %>
-            <div><p style="color: red;"><%= errorMessage %></p></div>
+            <div class="error_message"><p><%= errorMessage %></p></div>
         <% } %>
     </div>
 </body>
