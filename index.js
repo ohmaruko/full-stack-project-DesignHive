@@ -28,16 +28,18 @@ db.connect();
 // Log in
 app.get('/', (req, res) => {
     res.render("index.ejs");    
-    console.log(req.session);
 })
 app.post('/', async (req, res) => {
     const { username, password } = req.body;//user's input
     console.log(`username input: ${username}, password input: ${password}`);
     const userQueryResult = await db.query("SELECT * FROM users WHERE user_name=$1", [username]);//query data from username input
-    console.log(userQueryResult.rows);
+    // console.log(userQueryResult.rows);
 
-    if(password == userQueryResult.rows[0].password){
-        console.log("success")
+    if(userQueryResult.rows.length > 0 && password == userQueryResult.rows[0].password){
+        console.log("logged in successfuly")
+        // set current user's user_id to the current session below
+        // so req.session.userId is accessible across the app:]
+        req.session.userId = userQueryResult.rows[0].user_id;
         res.redirect("/feed");
     } else {
         res.render("index.ejs", {errorMessage: "Invalid username or password. Please try again."})
@@ -45,6 +47,9 @@ app.post('/', async (req, res) => {
 })
 
 // Feed
+app.get('/feed', (req, res) => {
+    res.render('feed.ejs')
+})
 
 // Account
 
