@@ -1,0 +1,55 @@
+body {
+    background-color: var(--green);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+textarea {
+    width: 360px;
+    height: 100px;
+    border: 1px solid #A7A7A7;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    color: #A7A7A7;
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--green);
+    color: white;
+    /* font-weight: bold; */
+}
+
+button:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.error_message p {
+    color: var(--error-red)
+}

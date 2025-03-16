@@ -47,13 +47,44 @@ app.post('/', async (req, res) => {
 })
 
 // Feed
-app.get('/feed', (req, res) => {
-    res.render('feed.ejs')
-})
+app.get('/feed', async (req, res) => {
+    try {
+        const posts = await db.query("SELECT posts.content, users.user_name FROM posts JOIN users ON posts.user_id = users.user_id ORDER BY posts.created_at DESC");
+        res.render('feed.ejs', { posts: posts.rows });
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // Account
 
 // New Post
+app.get('/newPost', (req, res) => {
+    res.render('newPost.ejs')
+})
+
+app.post('/newPost', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/');
+    }
+
+    const { postContent } = req.body;
+    
+    if (!postContent.trim()) {
+        return res.render('newPost.ejs', { errorMessage: "Post cannot be empty" });
+    }
+
+    try {
+        await db.query("INSERT INTO posts (user_id, content, created_at) VALUES ($1, $2, NOW())", [req.session.userId, postContent]);
+        res.redirect('/feed');
+    } catch (error) {
+        console.error("Error inserting post:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 
 app.listen(port, () => {
