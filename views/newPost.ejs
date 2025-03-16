@@ -11,13 +11,17 @@
 
 <body>
     <div class="container">
-        <form id="newPostForm" action="/newPost" method="POST">
+        <div>
+            <p class="emoji"><%=locals.userEmoji%></p>
+        </div>
+        <form id="newPostForm" action="/feed" method="POST">
             <textarea name="postContent" id="postContent" placeholder="What do you wanna post?" required></textarea>
             <button type="submit">Post</button>
         </form>
     </div>
 
     <script>
+        const emoji = '<%=locals.userEmoji%>'
         document.getElementById("newPostForm").addEventListener("submit", function (event) {
             const textArea = document.getElementById("postContent");
             if (textArea.value.trim() === "") {

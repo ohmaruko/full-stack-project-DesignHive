@@ -9,12 +9,17 @@ body {
 .container {
     background-color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 700px;
     border-radius: 20px;
     padding: 3rem;
+    gap: 1rem;
+}
+
+.emoji {
+    font-size: 3rem;
+    margin: 0;
 }
 
 form {

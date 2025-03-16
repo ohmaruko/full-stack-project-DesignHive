@@ -49,7 +49,7 @@ app.post('/', async (req, res) => {
 // Feed
 app.get('/feed', async (req, res) => {
     try {
-        const posts = await db.query("SELECT posts.content, users.user_name FROM posts JOIN users ON posts.user_id = users.user_id ORDER BY posts.created_at DESC");
+        const posts = await db.query("SELECT posts.post_id, posts.content, users.user_name FROM posts, users");
         res.render('feed.ejs', { posts: posts.rows });
     } catch (error) {
         console.error("Error fetching posts:", error);
@@ -61,23 +61,34 @@ app.get('/feed', async (req, res) => {
 // Account
 
 // New Post
-app.get('/newPost', (req, res) => {
-    res.render('newPost.ejs')
+
+app.get('/newPost', async (req, res) => {
+    const userId = req.session.userId;
+    const userQueryResult = await db.query("SELECT * FROM users WHERE user_id=$1", [userId]);
+    req.session.emoji = userQueryResult.rows[0].personal_emoji;
+    const userEmoji = req.session.emoji;
+    console.log(`user id: ${userId}, emoji: ${userEmoji}`);
+    res.render('newPost.ejs', {userEmoji: userEmoji});
+
 })
 
-app.post('/newPost', async (req, res) => {
+app.post('/feed', async (req, res) => {
+    const user = req.session.userId;
+    const result = await db.query("SELECT user_id FROM users WHERE user_id=$1", [user]);
+
     if (!req.session.userId) {
         return res.redirect('/');
     }
 
     const { postContent } = req.body;
+    console.log(`post: ${postContent}`);
     
     if (!postContent.trim()) {
         return res.render('newPost.ejs', { errorMessage: "Post cannot be empty" });
     }
 
     try {
-        await db.query("INSERT INTO posts (user_id, content, created_at) VALUES ($1, $2, NOW())", [req.session.userId, postContent]);
+        await db.query("INSERT INTO posts (content, user_id) VALUES ($1, $2)", [postContent, req.session.userId]);
         res.redirect('/feed');
     } catch (error) {
         console.error("Error inserting post:", error);
