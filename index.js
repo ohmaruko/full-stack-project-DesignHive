@@ -87,9 +87,19 @@ app.post('/feed', async (req, res) => {
         return res.render('newPost.ejs', { errorMessage: "Post cannot be empty" });
     }
 
+    const postResult = await db.query("SELECT COUNT(*) AS count FROM posts");
+
     try {
-        await db.query("INSERT INTO posts (content, user_id) VALUES ($1, $2)", [postContent, req.session.userId]);
+        if (Array.isArray(postResult.rows) && postResult.rows.length > 0) {
+        const currentPostNumber = Number(postResult.rows[0].count); 
+        const postNumber = currentPostNumber + 1;
+
+        console.log(postNumber); 
+        await db.query("INSERT INTO posts (post_id, content, user_id) VALUES ($1, $2, $3)", [postNumber, postContent, req.session.userId]);
         res.redirect('/feed');
+    } else {
+    throw new Error("Failed to fetch post count from the database.");
+}
     } catch (error) {
         console.error("Error inserting post:", error);
         res.status(500).send("Server Error");
