@@ -9,5 +9,5 @@
 ## The instructions on how to run the application locally 
 1. Download the data file
 2. Import the data to pgadmin
-3. Install node, nodemon, ejs, express, pg
-4. Run the application
+3. Install npm
+4. Run the application with nodemon
