@@ -16,3 +16,22 @@ button {
     font-family: "Inter", sans-serif;
     font-weight: bold; 
 }
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    border: 1px solid #DADADA;
+    border-radius: 20px;
+}
+.navbar a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    text-decoration: none;
+    color: black;
+}
+.navbar a:hover {
+    opacity: 0.7;
+}
