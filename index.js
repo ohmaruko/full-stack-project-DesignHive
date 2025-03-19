@@ -64,6 +64,34 @@ app.get('/feed', async (req, res) => {
 
 
 // Account
+app.get('/account', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/'); // Redirect if not logged in
+    }
+
+    try {
+        const userId = req.session.userId;
+
+        // Fetch user details
+        const result = await db.query("SELECT user_name, personal_emoji, bio, password FROM users WHERE user_id = $1", [userId]);
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.redirect('/');
+        }
+
+        // Fetch posts created by the user
+        const postsResult = await db.query("SELECT post_id, content FROM posts WHERE user_id = $1", [userId]);
+        const posts = postsResult.rows || []; 
+
+        // Render the account page with user and posts data
+        res.render('account.ejs', { user, posts });
+    } catch (error) {
+        console.error("Error fetching account details:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 
 // New Post
 

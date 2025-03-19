@@ -1,0 +1,60 @@
+body {
+    background-color: var(--green);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 700px;
+    border-radius: 20px;
+    padding: 1.5rem;
+    gap: 10px;
+}
+
+.emoji-username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.emoji {
+    font-size: 3.5rem;
+}
+
+.username {
+    font-style: italic;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-button {
+    width: 40%;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    padding: 3%;
+    border-radius: 10px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
