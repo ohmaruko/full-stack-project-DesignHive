@@ -3,11 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Hive Home</title>
+    <title>Feed</title>
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/feed.css">
 </head>
 <body>
-    This is feed page
+    <div class="main-container">
+        <div class="logo">
+            <img src="/image/logo.svg" alt="Design Hive Logo" />
+        </div>
+        <div class="page-name">
+            <h1 class="page-title">Your Feed</h1>
+        </div>    
+    </div>
+
+        <div class="feed-container">
+            <div class="navbar-container">
+                <!-- Includes the navbar from partials-->
+                <%- include('partials/navbar') %>
+            </div>
+            
+            <div class="feed-post-container">
+                <% if (posts.length > 0) { %>
+                    <div class="posts-wrap">
+                        <% posts.forEach(post => { %>
+                            <div class="post">
+                                <div class="personal-name-container">
+                                    <h2 class="emoji"> <%= post.personal_emoji %> </h2>
+                                    
+                                    <div class="user-text-post">
+                                        <h3 class="user-name"><%= post.user_name %> </h3>
+                                        <p><%= post.content %></p>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p>No posts available. Be the first to share something!</p>
+                <% } %>
+            </div>
+
+        </div>
+
+    
+    
+    
+    
 </body>
 </html>

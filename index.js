@@ -49,8 +49,13 @@ app.post('/', async (req, res) => {
 // Feed
 app.get('/feed', async (req, res) => {
     try {
-        const posts = await db.query("SELECT posts.post_id, posts.content, users.user_name FROM posts, users");
-        res.render('feed.ejs', { posts: posts.rows });
+        // Fetch posts with corresponding user details
+        const result = await db.query(`
+            SELECT posts.post_id, posts.content, users.user_name, users.personal_emoji
+            FROM posts
+            JOIN users ON users.user_id = posts.user_id
+        `);
+        res.render('feed.ejs', { posts: [...result.rows].reverse() });
     } catch (error) {
         console.error("Error fetching posts:", error);
         res.status(500).send("Server Error");
