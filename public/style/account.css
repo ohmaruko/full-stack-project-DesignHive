@@ -6,6 +6,15 @@ body {
     align-items: center;
 }
 
+.main-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.navbar-container {
+    margin-left: 1rem;
+}
+
 .container {
     margin: auto;
     background-color: white;
@@ -15,7 +24,7 @@ body {
     width: 700px;
     border-radius: 20px;
     padding: 1.5rem;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .emoji-username {

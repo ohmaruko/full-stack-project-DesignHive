@@ -13,36 +13,42 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="emoji-username">
-            <p class="emoji"><%= user.personal_emoji %></p>
-            <p class="username"><%= user.user_name %>'s account</p>
+    <div class="main-container">
+        <div class="navbar-container">
+            <!-- Includes the navbar from partials-->
+            <%- include('partials/navbar') %>
+        </div>
+        <div class="container">
+            <div class="emoji-username">
+                <p class="emoji"><%= user.personal_emoji %></p>
+                <p class="username"><%= user.user_name %>'s account</p>
+            </div>
+
+            <p class="bio"><strong>Bio:</strong> <%= user.bio %></p>
+
+            <p class="password"><strong>Password:</strong> <span id="passwordText"><%= user.password %></span></p>
+            <button onclick="togglePassword()" class="pw-button">Click to Show/Hide Password</button>
+
+            <h3>Your Posts</h3>
+            <% if (posts.length > 0) { %>
+                <ul>
+                    <% posts.forEach(post => { %>
+                        <div>
+                            <p class="post-content"><%= post.content %></p> 
+                        </div>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>You have not created any posts yet.</p>
+            <% } %>
         </div>
 
-        <p class="bio"><strong>Bio:</strong> <%= user.bio %></p>
-
-        <p class="password"><strong>Password:</strong> <span id="passwordText"><%= user.password %></span></p>
-        <button onclick="togglePassword()" class="pw-button">Click to Show/Hide Password</button>
-
-        <h3>Your Posts</h3>
-        <% if (posts.length > 0) { %>
-            <ul>
-                <% posts.forEach(post => { %>
-                    <div>
-                        <p class="post-content"><%= post.content %></p> 
-                    </div>
-                <% }) %>
-            </ul>
-        <% } else { %>
-            <p>You have not created any posts yet.</p>
-        <% } %>
-
-        <script>
-            function togglePassword() {
-                const passwordText = document.getElementById("passwordText");
-                passwordText.style.display = (passwordText.style.display === "none") ? "inline" : "none";
-            }
-        </script>
+            <script>
+                function togglePassword() {
+                    const passwordText = document.getElementById("passwordText");
+                    passwordText.style.display = (passwordText.style.display === "none") ? "inline" : "none";
+                }
+            </script>
     </div>
 </body>
 </html>
