@@ -46,6 +46,12 @@ app.post('/', async (req, res) => {
     }
 })
 
+// log out
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+})
+
 // Feed
 app.get('/feed', async (req, res) => {
     try {
