@@ -82,13 +82,9 @@ app.get('/account', async (req, res) => {
         const result = await db.query("SELECT user_name, personal_emoji, bio, password FROM users WHERE user_id = $1", [userId]);
         const user = result.rows[0];
 
-        if (!user) {
-            return res.redirect('/');
-        }
-
         // Fetch posts created by the user
         const postsResult = await db.query("SELECT post_id, content FROM posts WHERE user_id = $1", [userId]);
-        const posts = postsResult.rows || []; 
+        const posts = postsResult.rows;
 
         // Render the account page with user and posts data
         res.render('account.ejs', { user, posts });
