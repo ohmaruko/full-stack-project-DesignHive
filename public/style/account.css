@@ -19,10 +19,10 @@ body {
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 700px;
     border-radius: 20px;
     padding: 1.5rem;
+    margin-top: 15px;
     /* gap: 10px; */
 }
 
