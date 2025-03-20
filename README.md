@@ -7,7 +7,15 @@
 - Account Page: Angela
 
 ## The instructions on how to run the application locally 
-1. Download the data file
-2. Import the data to pgadmin
-3. Install npm
-4. Run the application with nodemon
+### Setting up database in pgadmin:
+- Create a database called "DesignHive"
+- Set the password of the "DesignHive" database to "1234"
+- Create a table called "users"
+- Import the "users.csv" file to the "users" table
+- Create a table called "posts"
+- Import the "posts.csv" file to the "posts" table
+
+### Setting up the app in VsCode:
+- npm install express ejs pg
+- npm install --save-dev nodemon
+- Run the application with node index.js
