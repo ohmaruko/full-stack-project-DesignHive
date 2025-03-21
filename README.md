@@ -9,13 +9,30 @@
 ## The instructions on how to run the application locally 
 ### Setting up database in pgadmin:
 - Create a database called "DesignHive"
+- Set the user to "postgres".
 - Set the password of the "DesignHive" database to "1234"
-- Create a table called "users"
-- Import the "users.csv" file to the "users" table
-- Create a table called "posts"
-- Import the "posts.csv" file to the "posts" table
+- Run the following SQL command to create the users table:
+```
+CREATE TABLE users (
+user_id SERIAL primary key,
+user_name TEXT,
+password TEXT,
+personal_emoji TEXT,
+bio TEXT
+)
+```
+- Import the "users.csv" file to the "users" table.
+- Ensure that Options > Header is enabled during import.
+```
+CREATE TABLE posts (
+    post_id SERIAL primary key,
+    content TEXT,
+    user_id INT
+)
+```
+- Import the "posts.csv" file to the "posts" table.
+- Ensure that Options > Header is enabled during import.
 
 ### Setting up the app in VsCode:
-- npm install express ejs pg
-- npm install --save-dev nodemon
+- npm install
 - Run the application with node index.js
