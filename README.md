@@ -23,6 +23,7 @@ bio TEXT
 ```
 - Import the "users.csv" file to the "users" table.
 - Ensure that Options > Header is enabled during import.
+- Run the following SQL command to create the posts table:
 ```
 CREATE TABLE posts (
     post_id SERIAL primary key,
